@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:browser="http://namespaces.zope.org/browser"
+        xmlns:zcml="http://namespaces.zope.org/zcml">
+        <configure zcml:condition="installed Products.Zuul">
+
+            <include package="Products.ZenUtils.extdirect.zope" file="meta.zcml"/>
+
+
+            <!-- ZenPack Info -->
+
+            <browser:directRouter
+                name="FCMGMT_router"
+                for="*"
+                class="ZenPacks.community.FCMGMT.routers.FCMGMTRouter"
+                namespace="Zenoss.remote"
+                permission="zenoss.View"
+            />
+    
+            <adapter
+                name="FCMGMTAdapter"
+                provides="ZenPacks.community.FCMGMT.interfaces.IFCMGMTFacade"
+                for="*"
+                factory="ZenPacks.community.FCMGMT.facades.FCMGMTFacade"
+            />
+                
+            <browser:resourceDirectory
+                    name="FCMGMT"
+                    directory="resources"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.FCMGMT.info.connUnitInfo"
+                for="ZenPacks.community.FCMGMT.connUnit.connUnit"
+                provides="ZenPacks.community.FCMGMT.interfaces.IconnUnitInfo"
+            />
+    
+            <browser:viewlet
+                name="js-connUnit"
+                paths="/++resource++FCMGMT/connunit.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.connUnitgetEventClassesVocabulary"
+                name="connUnitgetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.FCMGMT.info.connUnitSensorInfo"
+                for="ZenPacks.community.FCMGMT.connUnitSensor.connUnitSensor"
+                provides="ZenPacks.community.FCMGMT.interfaces.IconnUnitSensorInfo"
+            />
+    
+            <browser:viewlet
+                name="js-connUnitSensor"
+                paths="/++resource++FCMGMT/connunitsensor.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.connUnitSensorgetEventClassesVocabulary"
+                name="connUnitSensorgetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.FCMGMT.info.connUnitLinkInfo"
+                for="ZenPacks.community.FCMGMT.connUnitLink.connUnitLink"
+                provides="ZenPacks.community.FCMGMT.interfaces.IconnUnitLinkInfo"
+            />
+    
+            <browser:viewlet
+                name="js-connUnitLink"
+                paths="/++resource++FCMGMT/connunitlink.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.connUnitLinkgetEventClassesVocabulary"
+                name="connUnitLinkgetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.FCMGMT.info.connUnitPortInfo"
+                for="ZenPacks.community.FCMGMT.connUnitPort.connUnitPort"
+                provides="ZenPacks.community.FCMGMT.interfaces.IconnUnitPortInfo"
+            />
+    
+            <browser:viewlet
+                name="js-connUnitPort"
+                paths="/++resource++FCMGMT/connunitport.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.connUnitPortgetEventClassesVocabulary"
+                name="connUnitPortgetEventClasses"
+            />
+
+        </configure>
+    </configure>
+
